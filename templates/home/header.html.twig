@@ -1,0 +1,21 @@
+<div id="header">
+    <div id="header-logo">
+        <img src="{{ asset('build/images/logo2.821d0594.svg') }}" alt="Logo"/>
+    </div>
+    <div id="header-login-register">
+        <div id="header-login">
+            {% if logged %}
+            <p>{{ user.nick }}</p>
+            <a href=" {{ path('app_logout') }}">Wyloguj się</a>
+            {% endif %}
+            {% if logged == false %}
+            <a href="{{ path('app_login') }}">ZALOGUJ SIĘ <i class="fa-solid fa-right-to-bracket"></i></a>
+            {% endif %}
+        </div>
+        <div id="header-register">
+            {% if logged == false %}
+            <a href="{{ path('app_register') }}">UTWÓRZ KONTO</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

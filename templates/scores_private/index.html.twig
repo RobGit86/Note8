@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Secular+One&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    {% endblock %}
+
+</head>
+
+<body>
+
+    {{ include('home/header.html.twig') }}
+    {{ include('home/navbar.html.twig') }}
+
+    <div>
+
+        <div id="ContentScoresPrivate">
+            
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <button id="BtnCreateScore" onclick="showPane();"><i class="fa-solid fa-circle-plus"></i> Utwórz nową partyturę</button>
+
+            <div id="CreateScorePane">
+                
+                <form action="{{ path('app_editor') }}" method="POST">
+
+                <input type="hidden" name="idScore" value="-1">
+
+                <div class="gridContainer">
+
+                    <div class="gridComposer gridPadding inputGrid gridBorder">
+                        <label for="composer">Kompozytor:</label>
+                        <input type="text" id="composer" name="composer">
+                    </div>
+
+                    <div class="gridTitle gridPadding inputGrid gridBorder">
+                        <label for="title">Tytuł:</label>
+                        <input type="text" id="title" name="title">
+                    </div>
+
+                    <div class="gridAuthor gridPadding inputGrid gridBorder">
+                        <label for="author">Autor:</label>
+                        <input type="text" disabled="disabled" id="author" placeholder="{{ user.nick }}">
+                    </div>
+
+                    <div class="gridMeter gridPadding inputGrid gridBorder">
+                        <label>Metrum: <b style="color: red">(4/4 lub 3/8)</b></label>
+                        <div>
+                            <input type="text" id="meterUp" name="meterUp" style="width: 40px;"/>
+                            <input type="text" id="meterDown" name="meterDown" style="width: 40px;"/>
+                        </div>
+                    </div>
+
+                    <div class="gridKey gridPadding inputGrid gridBorder">
+                        <label>Tonacja: <b style="color: red">("C" lub "bbb")</b></label>
+                        <div>
+                            <input type="text" id="key" name="key"/>
+                        </div>
+                        
+                        {# <div>
+                            <input type="radio"><span>C Major</span>
+                        </div> #}
+                        {# <div>
+                            <input type="radio">
+                            <span style="color: red;">#</span>
+                            <span style="color: red;">#</span>
+                            <span style="color: red;">#</span>
+                            <span style="color: red;">#</span>
+                            <span>#</span>
+                            <span>#</span>
+                            <span>#</span>
+                        </div>
+                        <div>
+                            <input type="radio">
+                            <span>b</span>
+                            <span>b</span>
+                            <span>b</span>
+                            <span>b</span>
+                            <span>b</span>
+                            <span>b</span>
+                            <span>b</span>
+                        </div> #}
+                    </div>
+
+                    <div class="gridTempo gridPadding inputGrid gridBorder">
+                        <label for="tempo">Tempo:</label>
+                        <div>
+                            <input type="text" id="meterUp" name="tempo" style="width: 80px;">
+                        </div>
+
+                    </div>
+
+                    <div class="gridTrack gridPadding inputGrid gridBorder">
+                        <label style="padding-bottom: 10px;">Instrumenty i klucze: <b style="color: red">Ciąg składający się z liter F i G - np. "GGF"</b></label>
+                        {# <div style="padding-top: 12px;">
+                            <span style="padding-right: 5px; padding-top: 10px; font-weight: bold">G</span><span>Instrument 1</span>
+                        </div>
+                        <div style="padding-top: 8px;">
+                            <span style="padding-right: 5px; font-weight: bold">F</span><span>Instrument 2</span>
+                        </div> #}
+                        {# <div style="padding-top: 8px;">
+                            <div> #}
+                        <div>
+                            <input type="text" id="instruments" name="instruments" style="width: 200px;">
+                        </div>    
+                            
+                            {# </div>
+                            <div>
+                                <span> Dodaj kolejny instrument <i class="fa-solid fa-plus" style="color: green;"></i><span>
+                            </div>
+                        </div> #}
+                    </div>
+
+                    <div style="margin-top: 20px">
+                        <span>
+                            <button type="submit" class="BtnLoadPublicScore" style="background-color: green;"><i class="fa-solid fa-circle-plus"></i> UTWÓRZ</button>
+                        </span>
+                        <span>
+                            <button type="button" class="BtnLoadPublicScore" style="background-color: red;" onclick="hidePane()"><i class="fa-solid fa-ban"></i></i> ANULUJ</button>
+                        </span>
+                    </div>
+
+                </div>
+
+                </form>
+
+            </div>
+
+            <hr>
+
+            <h2 style="margin-top: 35px;"><i class="fa-solid fa-book"></i> MOJA BIBLIOTEKA</h2>
+
+            <table class='ScoresPublicTable'>
+                <tr>
+                    <th>Lp</th>
+                    <th>Kompozytor</th>
+                    <th>Tytuł</th>
+                    <th>Autor opracowania</th>
+                    <th>Data modyfikacji</th>
+                    <th>Opublikowany</th>
+                    <th></th>
+                </tr>
+                {% set c = 1 %}
+                {% for score in scores %}
+                <tr>
+                    <td>{{ c }}</td>
+                    <td>{{ score.composer }}</td>
+                    <td>{{ score.title }}</td>
+                    <td>{{ user.nick }}</td>
+                    <td>2022-05-10</td>
+                    <td>
+                    {% if score.public == 0 %}
+                        <form action='{{ path('app_scores_private_publish') }}' method='POST'>
+                            <input type='hidden' name='idScorePublish' value="{{ score.id }}">
+                            <button class="BtnLoadPublicScore" style="background-color: green;"><i class="fa-solid fa-upload"></i></i> PUBLIKUJ</button>
+                        </form>
+                    {% endif %}    
+                    {% if score.public == 1 %}
+                        <form action='{{ path('app_scores_private_publish') }}' method='POST'>
+                            <input type='hidden' name='idScorePublish' value="{{ score.id }}">
+                            <button class="BtnLoadPublicScore" style="background-color: green;"><i class="fa-solid fa-upload"></i></i> PRYWATNY</button>
+                            <i class="fa-solid fa-check" style="color: green;"></i>
+                        </form>
+                    {% endif %}
+                    </td>
+                    <td>
+                        <form action='{{ path('app_editor') }}' method='POST'>
+                            <input type='hidden' name='idScore' value='{{ score.id }}'>
+                            <button class="BtnLoadPublicScore"><i class="fa-solid fa-book-open"></i> OTWÓRZ</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action='{{ path('app_scores_private_remove') }}' method='POST'>
+                            <input type='hidden' name='idScoreRemove' value="{{ score.id }}">
+                            <button class="BtnLoadPublicScore" style="background-color: red"><i class="fa-solid fa-trash-can"></i> USUŃ</button>
+                        </form>
+                    </td>
+                </tr>
+                {% set c = c + 1 %}
+                {% endfor %}
+            </table>
+        </div>
+
+        <div id="FooterHome">
+            <span>Robert Błaszak 2022</span>
+        </div>
+    </div>
+
+    <script>
+
+        function showPane() {
+            var pane = document.getElementById("CreateScorePane");
+            pane.style.display = 'block';    
+        }
+
+        function hidePane() {
+            var pane = document.getElementById("CreateScorePane");
+            pane.style.display = 'none';
+        }
+
+    </script>
+
+</body>
+</html> 

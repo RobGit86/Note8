@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    
+    <title>Note8</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Secular+One&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    {% endblock %}
+    
+</head>
+
+<body>
+
+    <div>
+
+        {{ include('home/header.html.twig') }}
+        {{ include('home/navbar.html.twig') }}
+
+        <div id="content-home">
+
+            <div class="sticky-home-header">
+                <h1>Aktualności</h1>
+            </div>
+
+            <h3>#3 Premiera</h3>
+            <h5 class="ContentHomeDate">Data publickacji: 08.05.2022</h5>
+            <p><i class="fa-solid fa-newspaper"></i> Nowości:</p>
+            <span>Serwis w wersji 0.01 z dniem 08.05.2022 oddany do użytku. Na stronie dostępna baza publicznych utworów udostępnionych przez innych użytkowników oraz baza partytur własnych. Ponadto dostęp do edytora partytur w zakładce moje utwory, gdzie jest możliwość utworzenia własnej partytury.</span>
+            <p><i class="fa-solid fa-list-check"></i> Plany na przyszłość:</p>
+            <span>Nowe funkcje edytora nutowego:</span>
+            <ul>
+                <li>Eksport do formatu MIDI</li>
+                <li>Import plików MIDI</li>
+                <li>Eksport do formatu MusicXML</li>
+                <li>Import plików MusicXML</li>
+                <li>Coś jeszcze...</li>
+            </ul>
+            <span>Rozbudowa serwisu:</span>
+            <ul>
+                <li>Wykorzystanie frameworka Symfony</li>
+                <li>Dodanie komentarzy do utworów</li>               
+                <li>Dodanie ocen</li>
+            </ul>
+            <hr>
+            
+            <h3>#2 Przykładowy post</h3>
+            <h5 class="content-home-date">Data publickacji: 04.05.2022</h5>
+            <p>Przykładowy tekst</p>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis tristique nibh. Proin vehicula arcu id ligula laoreet fringilla. Nunc ultrices, urna in mollis viverra, nulla eros imperdiet lectus, vel rhoncus ligula erat in sapien. Morbi ut tellus eget libero volutpat mollis. Praesent accumsan maximus lectus, eu dictum lectus faucibus quis. Suspendisse lacinia et nibh ac lobortis. Maecenas gravida enim nec justo dapibus, in suscipit dui euismod. Ut nulla enim, volutpat ut semper et, ullamcorper ac enim. Cras auctor semper dolor id convallis. In bibendum erat non augue pretium luctus. Aliquam a neque viverra, efficitur justo eu, egestas risus. Aenean ultricies at est at vulputate. Fusce mi ante, porta at odio id, lacinia molestie mauris.</span>
+            <hr>
+
+            <h3>#1 Przykładowy post</h3>
+            <h5 class="content-home-date">Data publickacji: 17.03.2022</h5>
+            <p>Przykładowy tekst</p>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis tristique nibh. Proin vehicula arcu id ligula laoreet fringilla. Nunc ultrices, urna in mollis viverra, nulla eros imperdiet lectus, vel rhoncus ligula erat in sapien. Morbi ut tellus eget libero volutpat mollis. Praesent accumsan maximus lectus, eu dictum lectus faucibus quis. Suspendisse lacinia et nibh ac lobortis. Maecenas gravida enim nec justo dapibus, in suscipit dui euismod. Ut nulla enim, volutpat ut semper et, ullamcorper ac enim. Cras auctor semper dolor id convallis. In bibendum erat non augue pretium luctus. Aliquam a neque viverra, efficitur justo eu, egestas risus. Aenean ultricies at est at vulputate. Fusce mi ante, porta at odio id, lacinia molestie mauris.</span>
+            <hr>        
+            
+            <button onclick="topFunction()" id="home-back-button" title="Go to top">Powrót</button>
+
+        </div>
+
+        {{ include('home/footer.html.twig') }}
+
+    </div>
+
+    <script>
+        var mybutton = document.getElementById("home-back-button");
+
+        window.onscroll = function() { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+</body>
+</html> 

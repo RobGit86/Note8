@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Kontakt</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Secular+One&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div>
+
+        {{ include('home/header.html.twig') }}
+        {{ include('home/navbar.html.twig') }}
+        
+        <div id="ContentContact">
+            <h2>Kontakt</h2>
+            <p>Dowolne zapytanie kieruj na poniższy adres:</p>
+            <span><i class="fa-solid fa-square-envelope"></i> robertblaszak1@gmail.com</span>
+            <p>Jeżeli chcesz widzieć nowe funkcje aplikacji, lub coś nie działa jak należy to wypełnij poniższy formularz kontakotwy i wyślij zgłoszenie:</p>
+
+            <div class="containerContact">
+                <form action="#">
+
+                    <label for="fname">Imię</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Jak masz na imię...">
+
+                    <label for="subject">Temat</label>
+                    <textarea id="subject" name="subject" placeholder="Opisz swój problem..." style="height:200px"></textarea>
+
+                    <input type="submit" value="WYŚLIJ">
+                </form>
+            </div>
+        </div>
+
+        <div id="FooterHome">
+            <span>Robert Błaszak 2022</span>
+        </div>
+    </div>
+
+</body>
+</html> 

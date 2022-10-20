@@ -1,0 +1,146 @@
+$color1: #FBFEF9;
+$color2: #191923;
+$color3: #0E79B2;
+$color4: #7392B7;
+$color5: #FF1B1C;
+
+$font-primary: 'Quicksand', sans-serif;
+$font-secondary: 'Secular One', sans-serif;
+
+html {
+    font-family: $font-secondary;
+    font-size: 16px;
+    color: $color2;
+}
+
+body {
+    margin: 0 auto;
+}
+
+// HEADER PART
+
+#header {
+    display: flex;
+    background-color: $color3;
+    position: sticky;
+    top: 0;
+}
+
+#zoomer {
+    padding: 1rem;
+    border: 1px solid $color4;
+    box-shadow: inset 0 0 5px $color4;
+}
+
+#player {
+    padding: 1rem;
+    border: 1px solid $color4;
+    border-left: none;
+    box-shadow: inset 0 0 5px $color4;
+}
+
+#temp {
+    padding: 1rem;
+    border: 1px solid $color4;
+    border-left: none;
+    box-shadow: inset 0 0 5px $color4;
+}
+
+#save {
+    padding: 1rem;
+    border: 1px solid $color4;
+    border-left: none;
+    box-shadow: inset 0 0 5px $color4;
+}
+
+#back {
+    padding: 1rem;
+    border: 1px solid $color4;
+    border-left: none;
+    box-shadow: inset 0 0 5px $color4;
+}
+
+#btnPlay {
+    color: red;
+    cursor: pointer;
+}
+
+#btnStop {
+    cursor: pointer;
+}
+
+#btnPlay:hover {
+    color: red;
+    text-shadow: 1px 1px 2px black, 0 0 25px $color3, 0 0 5px $color4;
+}
+
+#btnStop:hover {
+    color: $color2;
+    text-shadow: 1px 1px 2px black, 0 0 25px $color3, 0 0 5px $color4;
+}
+
+// SCORE PART
+
+#score {
+    // margin-top: 90px;
+    float: left;
+    width: 100%;
+    /* min-height: 5000px; */
+    /* overflow: auto; */
+    background-color: #483D3F;  
+}
+
+#ScoreContainer {
+    /* background-color: rgb(154, 250, 0); */
+    /* padding-top: 400px; */
+    background-color: #483D3F;
+    /* height: 100%; */
+    /* min-height: 5000px; */
+}
+
+#SvgScore {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    /* min-height: 5000px; */
+}
+
+#svgContext {
+    width: 0;
+    height: 0;
+}
+
+.MultiPageView {
+    background-color: red;
+    margin: 0 auto;
+}
+
+.SinglePageView {
+    background-color: green;
+    margin: 0 auto;
+}
+
+.StripPageView {
+    background-color: rgb(255, 238, 0);
+    float: left;
+    margin-left: 25px;
+    height: 600px;
+}
+
+
+.small { font: italic 13px sans-serif; }
+.heavy { font: bold 30px sans-serif; }
+
+/* Note that the color of the text is set with the    *
+ * fill property, the color property is for HTML only */
+.Rrrrr { font: italic 40px serif; fill: red; }
+
+input, label {
+    display: inline;
+    float: left;
+}
+
+.navH {
+    background-color: red;
+    display: inline-block;
+}

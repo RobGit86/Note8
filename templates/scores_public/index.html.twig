@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Note8</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Secular+One&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div>
+
+        {{ include('home/header.html.twig') }}
+        {{ include('home/navbar.html.twig') }}
+
+        <div id="content-scores-public">
+
+            <div class="search-bar">
+                <form action="{{ path('app_scores_public') }}" method="POST">
+                    <input type="text" name="searchScore" placeholder="Wyszukaj utwór"/>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            {% for message in app.flashes('found') %}
+            <div class="flash-found">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            <hr>
+
+            <table class='ScoresPublicTable'>
+                <tr>
+                    <th>Lp</th>
+                    <th>Kompozytor</th>
+                    <th>Tytuł</th>
+                    <th>Autor opracowania</th>
+                    <th></th>
+                </tr>
+                {% set counter = 1 %}
+                {% for score in scores %}
+                <tr style="border-bottom: 5px solid black">
+                    <td>{{ counter }}</td>
+                    <td>{{ score.composer }}</td>
+                    <td>{{ score.title }}</td>
+                    <td>{{ score.user.nick }}</td>
+                    <td>
+                        <form action='{{ path('app_editor') }}' method='POST'>
+                            <input type='hidden' name='idScore' value='{{ score.id }}'>
+                            <button type='submit' class="BtnLoadPublicScore"><i class="fa-solid fa-book-open"></i> OTWÓRZ</button>
+                        </form>
+                    </td>
+                </tr>
+                {% set counter = counter + 1 %}
+                {% endfor %}
+            </table>
+        </div>
+
+        {{ include('home/footer.html.twig') }}
+
+    </div>
+
+</body>
+</html> 
